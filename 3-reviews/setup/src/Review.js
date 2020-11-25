@@ -31,13 +31,13 @@ const Review = () => {
             )
           }
         />
-        <button
-          className='random-btn'
-          onClick={() => setIndex(Math.floor(Math.random() * people.length))}
-        >
-          Suprise Me
-        </button>
       </div>
+      <button
+        className='random-btn'
+        onClick={() => setIndex(Math.floor(Math.random() * people.length))}
+      >
+        Suprise Me
+      </button>
     </article>
   )
 }
