@@ -3,7 +3,7 @@ import logo from './images/logo.svg'
 import { FaBars } from 'react-icons/fa'
 import { useGlobalContext } from './context'
 const Navbar = () => {
-  const { openSideBar, openSubMenu } = useGlobalContext()
+  const { openSideBar, openSubMenu, closeSubMenu } = useGlobalContext()
   const handleMouseOver = (e) => {
     console.log(e.target)
     const page = e.target.textContent
@@ -13,10 +13,14 @@ const Navbar = () => {
 
     openSubMenu(page, { center, bottom })
   }
-
+  const handelMouseOverForNav = (e) => {
+    console.log(e.target.classList)
+    if (e.target.classList.contains('link-btn')) return
+    closeSubMenu()
+  }
   return (
     <nav>
-      <div className='nav'>
+      <div className='nav' onMouseOver={(e) => handelMouseOverForNav(e)}>
         <div className='nav-center'>
           <div className='nav-header'>
             <img src={logo} alt='stripe' />

@@ -4,6 +4,7 @@ import sublinks from './data'
 import { useGlobalContext } from './context'
 const Submenu = () => {
   const [subMenuLinks, setSubMenuLinks] = useState([])
+  const [columns, setCloumns] = useState(2)
 
   const subMenuContainer = useRef(null)
   const {
@@ -21,6 +22,7 @@ const Submenu = () => {
     // setSubMenuLinks(result.links)
     console.log('result', result)
     if (result) {
+      setCloumns(result.links.length > 4 ? 4 : result.links.length)
       setSubMenuLinks(result.links)
     }
   }, [page, center, bottom])
@@ -31,7 +33,7 @@ const Submenu = () => {
       ref={subMenuContainer}
     >
       <h4>{page}</h4>
-      <div className={`submenu-center col-2`}>
+      <div className={`submenu-center col-${columns}`}>
         {subMenuLinks.map((menu, index) => {
           const { label, icon, url } = menu
           return (
