@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useGlobalContext } from '../context'
 
 const SearchForm = () => {
   const { searchText, setSearchText } = useGlobalContext()
+  const inputRef = useRef()
+  const handleChange = (e) => {
+    setSearchText(inputRef.current.value)
+  }
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
   return (
     <section className='section search'>
       <form className='search-form'>
@@ -13,7 +20,9 @@ const SearchForm = () => {
             name='name'
             id='name'
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            ref={inputRef}
+            onChange={handleChange}
+            // onInput={(e) => setSearchText(e.target.value)}
           />
         </div>
       </form>

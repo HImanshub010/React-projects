@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Cocktail from './Cocktail'
 import Loading from './Loading'
 import { useGlobalContext } from '../context'
@@ -17,23 +18,7 @@ const CocktailList = () => {
       <h2 className='section-title'>Cocktails</h2>
       <div className='cocktails-center'>
         {cocktailsList.map((cocktails) => {
-          const { id, image, name, glass, info } = cocktails
-          return (
-            <article key={id} className='cocktail'>
-              <div className='img-container'>
-                <img src={image} alt={name} />
-              </div>
-              <div className='cocktail-footer'>
-                <h3>{name}</h3>
-                <h4>{glass}</h4>
-                <p>{info}</p>
-                {/* <Link
-                  to='/cocktail'
-                  className='btn btn-primary btn-details'
-                ></Link> */}
-              </div>
-            </article>
-          )
+          return <Cocktail key={cocktails.id} {...cocktails} />
         })}
       </div>
     </section>

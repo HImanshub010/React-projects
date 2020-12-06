@@ -14,24 +14,33 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${url}${searchText}`)
       const data = await response.json()
-      const drinks = data.drinks.map((drink) => {
-        const {
-          idDrink: id,
-          strDrink: name,
-          strAlcoholic: info,
-          strGlass: glass,
-          strDrinkThumb: image,
-        } = drink
-        return {
-          id,
-          name,
-          info,
-          glass,
-          image,
-        }
-      })
-      setCocktailsList(drinks)
-      setLoading(false)
+      if (data.drinks) {
+        const drinks = data.drinks.map((drink) => {
+          const {
+            idDrink: id,
+            strDrink: name,
+            strAlcoholic: info,
+            strGlass: glass,
+            strDrinkThumb: image,
+          } = drink
+          return {
+            id,
+            name,
+            info,
+            glass,
+            image,
+          }
+        })
+        console.log(`drinks for text ${searchText} are ${drinks}`)
+        setCocktailsList(drinks)
+        setLoading(false)
+      } else {
+        console.log(
+          `drinks for else text ${searchText} are ${JSON.stringify(data)}`
+        )
+        setCocktailsList([])
+        setLoading(false)
+      }
     } catch (error) {
       setLoading(false)
     }
